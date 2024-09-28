@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: mealie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          resources:
+            requests:
+              memory: "500Mi" 
+              cpu: "250m"     
+            limits:
+              memory: "1000Mi"
+              cpu: "500m"     
+          envFrom:
+            - secretRef:
+                name: postgres-secrets
+          volumeMounts:
+            - name: mealie-pgdata
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: mealie-pgdata
+          persistentVolumeClaim:
+            claimName: mealie-pgdata-pvc

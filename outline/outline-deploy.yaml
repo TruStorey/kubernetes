@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: outline
+  namespace: outline
+  labels:
+    app: outline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: outline
+  template:
+    metadata:
+      labels:
+        app: outline
+    spec:
+      containers:
+        - name: outline
+          image: outlinewiki/outline:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: outline-secrets
+            - configMapRef:
+                name: outline-config
+          env:
+            - name: DATABASE_URL
+              value: "postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres-service:5432/$(POSTGRES_DB)"
+            - name: PGSSLMODE # Add this line
+              value: "disable" # Set to disable SSL
+          resources:
+            requests:
+              memory: "512Mi" # Memory request (minimum amount)
+              cpu: "250m" # CPU request (minimum amount)
+            limits:
+              memory: "1Gi" # Memory limit (maximum allowed)
+              cpu: "500m" # CPU limit (maximum allowed)
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/outline/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: outline-pvc

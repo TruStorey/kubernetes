@@ -1,0 +1,17 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mealie-config
+  namespace: mealie
+data:
+  ALLOW_SIGNUP: "true"
+  PUID: "1000"
+  PGID: "1000"
+  MAX_WORKERS: "1"
+  WEB_CONCURRENCY: "1"
+  BASE_URL: "https://mealie.danber.casa"
+  DB_ENGINE: postgres
+  POSTGRES_PORT: "5432"
+  DB_HOST: postgres
+  OIDC_AUTH_ENABLED: "true"
+  OIDC_SIGNUP_ENABLED: "true"
