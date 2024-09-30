@@ -5,7 +5,7 @@ metadata:
   namespace: heimdall
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: ceph-rbd
   resources:
     requests:
