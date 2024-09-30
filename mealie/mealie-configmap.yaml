@@ -15,3 +15,5 @@ data:
   DB_HOST: postgres
   OIDC_AUTH_ENABLED: "true"
   OIDC_SIGNUP_ENABLED: "true"
+  OIDC_CONFIGURATION_URL: "https://login.microsoftonline.com/cd9c5644-57e6-407d-b2e3-f211448f33e6/v2.0/.well-known/openid-configuration"
+  OIDC_PROVIDER_NAME: "Azure OpenID"
