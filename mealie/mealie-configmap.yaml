@@ -15,4 +15,3 @@ data:
   DB_HOST: postgres
   OIDC_AUTH_ENABLED: "true"
   OIDC_SIGNUP_ENABLED: "true"
-  OIDC_SCOPES: "openid profile email Group.Read.All"
