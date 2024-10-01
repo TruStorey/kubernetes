@@ -105,3 +105,20 @@ spec:
             name: bar100-service
             port:
               number: 80
+# Old way of doing the service for an external IP. No ingress required. 
+# Removed this to allow traefik to handle ingress above
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: bar100
+#   namespace: bar100
+# spec:
+#   type: LoadBalancer
+#   ports:
+#     - name: http
+#       port: 80
+#       targetPort: 80
+#       protocol: TCP
+#   selector:
+#     app: bar100
+
