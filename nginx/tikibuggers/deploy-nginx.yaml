@@ -68,14 +68,56 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tikibuggers
+  name: tikibuggers-service
   namespace: tikibuggers
+  labels:
+    app: tikibuggers
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-    - name: http
-      port: 80
-      targetPort: 80
-      protocol: TCP
+  - port: 80
+    targetPort: 80
   selector:
     app: tikibuggers
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tikibuggers-ingress
+  namespace: tikibuggers
+  labels:
+    app: tikibuggers
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - tikibuggers.danber.casa
+    secretName: tikibuggers-tls
+  rules:
+  - host: tikibuggers.danber.casa
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: tikibuggers-service
+            port:
+              number: 80
+# Old way of doing the service for an external IP. No ingress required. 
+# Removed this to allow traefik to handle ingress above
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: tikibuggers
+#   namespace: tikibuggers
+# spec:
+#   type: LoadBalancer
+#   ports:
+#     - name: http
+#       port: 80
+#       targetPort: 80
+#       protocol: TCP
+#   selector:
+#     app: tikibuggers
