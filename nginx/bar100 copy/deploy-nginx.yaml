@@ -68,40 +68,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bar100-service
+  name: bar100
   namespace: bar100
-  labels:
-    app: bar100
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - port: 80
-    targetPort: 80
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
   selector:
     app: bar100
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: bar100-ingress
-  namespace: bar100
-  labels:
-    app: bar100
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-spec:
-  tls:
-  - hosts:
-    - bar100.danber.casa
-    secretName: bar100-tls
-  rules:
-  - host: bar100.danber.casa
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: bar100-service
-            port:
-              number: 80
