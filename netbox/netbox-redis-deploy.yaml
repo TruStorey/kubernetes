@@ -21,8 +21,10 @@ spec:
             - -c
             - valkey-server --appendonly yes --requirepass $$REDIS_PASSWORD
           envFrom:
+            - configMapRef:
+                name: netbox-env-config
             - secretRef:
-                name: redis-env-secrets
+                name: netbox-env-secrets
           ports:
             - containerPort: 6379
           resources:
@@ -63,8 +65,10 @@ spec:
             - -c
             - valkey-server --requirepass $$REDIS_PASSWORD
           envFrom:
+            - configMapRef:
+                name: netbox-env-config
             - secretRef:
-                name: redis-cache-env-secrets
+                name: netbox-env-secrets
           ports:
             - containerPort: 6379
           resources:

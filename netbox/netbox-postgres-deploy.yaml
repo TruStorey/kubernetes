@@ -17,8 +17,10 @@ spec:
         - name: postgres
           image: postgres:16-alpine
           envFrom:
+            - configMapRef:
+                name: netbox-env-config
             - secretRef:
-                name: postgres-env-secrets
+                name: netbox-env-secrets
           ports:
             - containerPort: 5432
           resources:
