@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: temp-pod
+  namespace: netbox
+spec:
+  restartPolicy: Never
+  containers:
+    - name: temp-container
+      image: alpine
+      command: ["/bin/sh", "-c", "sleep 3600"]
+      volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+  volumes:
+    - name: postgres-data
+      persistentVolumeClaim:
+        claimName: netbox-postgres-data
