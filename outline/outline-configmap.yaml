@@ -6,6 +6,7 @@ metadata:
 data:
   REDIS_URL: "redis://redis-service:6379"
   URL: "outline.danber.casa"
+  COLLABORATION_URL: "outline.danber.casa"
   FILE_STORAGE: "local"
   FILE_STORAGE_UPLOAD_MAX_SIZE: "1073741824"
   FILE_STORAGE_IMPORT_MAX_SIZE: "1073741824"
