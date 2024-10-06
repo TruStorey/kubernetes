@@ -38,10 +38,10 @@ spec:
               key: POSTGRES_DB
         resources:
           requests:
-            memory: "512Mi"   # Memory request for Postgres
+            memory: "256Mi"   # Memory request for Postgres
             cpu: "250m"       # CPU request for Postgres
           limits:
-            memory: "1Gi"     # Memory limit for Postgres
+            memory: "500Mi"     # Memory limit for Postgres
             cpu: "500m"       # CPU limit for Postgres
         volumeMounts:
         - name: postgres-storage

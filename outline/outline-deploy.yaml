@@ -32,11 +32,11 @@ spec:
               value: "disable" # Set to disable SSL
           resources:
             requests:
-              memory: "512Mi" # Memory request (minimum amount)
-              cpu: "250m" # CPU request (minimum amount)
+              memory: "256Mi" # Memory request (minimum amount)
+              cpu: "125m" # CPU request (minimum amount)
             limits:
-              memory: "1Gi" # Memory limit (maximum allowed)
-              cpu: "500m" # CPU limit (maximum allowed)
+              memory: "500Mi" # Memory limit (maximum allowed)
+              cpu: "250m" # CPU limit (maximum allowed)
           volumeMounts:
             - name: data
               mountPath: /var/lib/outline/data

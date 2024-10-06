@@ -21,6 +21,9 @@ spec:
         - name: uptime-kuma
           image: louislam/uptime-kuma:latest
           resources:
+            requests:
+              cpu: 250m
+              memory: 128Mi          
             limits:
               cpu: 500m
               memory: 256Mi
