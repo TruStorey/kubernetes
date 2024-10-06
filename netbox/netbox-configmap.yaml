@@ -14,3 +14,4 @@ data:
   REDIS_PASSWORD: ""
   REDIS_CACHE_HOST: "redis-cache"
   REDIS_CACHE_PORT: "6379"
+  SECRET_KEY: "Q^1ZnhidWp)bUJRsk6FD5IGqqkCn3-H0@1S3cs8YFPi)8Ze=SY"
