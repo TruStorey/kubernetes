@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: netbox
+  namespace: netbox
+spec:
+  selector:
+    app: netbox
+  ports:
+    - protocol: TCP
+      port: 80         # Exposes the service on port 80
+      targetPort: 8080  # The internal port used by the NetBox container
+  type: ClusterIP       # Internal service type, could be LoadBalancer or NodePort if external access is needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: netbox
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432        # Exposes the service on PostgreSQL default port
+      targetPort: 5432   # The internal port used by the PostgreSQL container
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: netbox
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 6379        # Exposes the service on Redis default port
+      targetPort: 6379   # The internal port used by Redis container
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-cache
+  namespace: netbox
+spec:
+  selector:
+    app: redis-cache
+  ports:
+    - protocol: TCP
+      port: 6379        # Exposes the service on Redis Cache default port
+      targetPort: 6379   # The internal port used by Redis Cache container
+  type: ClusterIP

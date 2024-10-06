@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netbox-env-config
+  namespace: netbox
+data:
+  ALLOWED_HOSTS: "localhost"
+  DB_NAME: "netbox" 
+  DB_USER: "netbox"
+  DB_PORT: "5432"
+  DB_HOST: "postgres"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  REDIS_PASSWORD: ""
+  REDIS_CACHE_HOST: "redis-cache"
+  REDIS_CACHE_PORT: "6379"

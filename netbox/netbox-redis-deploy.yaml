@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: netbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: valkey/valkey:8.0-alpine
+          command:
+            - sh
+            - -c
+            - valkey-server --appendonly yes --requirepass $$REDIS_PASSWORD
+          envFrom:
+            - secretRef:
+                name: redis-env-secrets
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "125m"    
+            limits:
+              memory: "500Mi"
+              cpu: "250m"     
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: netbox-redis-data
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-cache
+  namespace: netbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-cache
+  template:
+    metadata:
+      labels:
+        app: redis-cache
+    spec:
+      containers:
+        - name: redis-cache
+          image: valkey/valkey:8.0-alpine
+          command:
+            - sh
+            - -c
+            - valkey-server --requirepass $$REDIS_PASSWORD
+          envFrom:
+            - secretRef:
+                name: redis-cache-env-secrets
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "125m"    
+            limits:
+              memory: "500Mi"
+              cpu: "250m"       
+          volumeMounts:
+            - name: redis-cache-data
+              mountPath: /data
+      volumes:
+        - name: redis-cache-data
+          persistentVolumeClaim:
+            claimName: netbox-redis-cache-data
