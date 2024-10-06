@@ -44,12 +44,14 @@ spec:
             - name: subnetcalc-html
               mountPath: /usr/share/nginx/html
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: /healthz
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 10
           readinessProbe:
-            tcpSocket:
+            httpGet:
+              path: /healthz
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
