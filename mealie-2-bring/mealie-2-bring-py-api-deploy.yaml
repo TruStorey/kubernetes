@@ -13,6 +13,7 @@ spec:
       labels:
         app: mealie-2-bring-api
     spec:
+      hostNetwork: true
       containers:
         - name: mealie-2-bring-api
           image: ghcr.io/felixschndr/mealie-bring-api:latest
