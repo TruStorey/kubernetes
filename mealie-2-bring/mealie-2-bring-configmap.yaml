@@ -5,3 +5,4 @@ metadata:
   namespace: mealie
 data:
   POSTGRES_HOST_AUTH_METHOD: trust
+  LOG_LEVEL: DEBUG
