@@ -2,7 +2,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: mealie-2-bring-config
-  namespace: mealie
+  namespace: mealie-2-bring
 data:
   POSTGRES_HOST_AUTH_METHOD: trust
   LOG_LEVEL: DEBUG
