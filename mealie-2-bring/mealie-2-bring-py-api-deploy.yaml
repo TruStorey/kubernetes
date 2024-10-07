@@ -13,7 +13,7 @@ spec:
       labels:
         app: mealie-2-bring-api
     spec:
-      #hostNetwork: true
+      hostNetwork: true
       containers:
         - name: mealie-2-bring-api
           image: ghcr.io/felixschndr/mealie-bring-api:latest
@@ -45,20 +45,4 @@ spec:
       port: 80
       targetPort: 8742
   type: LoadBalancer
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-egress
-  namespace: mealie
-spec:
-  podSelector:
-    matchLabels:
-      app: mealie-2-bring-api
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0  # Allows all outbound traffic
 
