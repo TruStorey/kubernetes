@@ -41,6 +41,6 @@ spec:
     app: mealie-2-bring
   ports:
     - protocol: TCP
-      port: 12000
+      port: 9000
       targetPort: 9000
   type: LoadBalancer
