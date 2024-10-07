@@ -13,7 +13,7 @@ spec:
       labels:
         app: mealie-2-bring-api
     spec:
-      hostNetwork: true
+      #hostNetwork: true
       containers:
         - name: mealie-2-bring-api
           image: ghcr.io/felixschndr/mealie-bring-api:latest
@@ -31,3 +31,17 @@ spec:
                 name: mealie-2-bring-secrets
             - configMapRef:
                 name: mealie-2-bring-config                     
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mealie-2-bring-api
+  namespace: mealie 
+spec:
+  selector:
+    app: mealie-2-bring-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8742
+  type: LoadBalancer
