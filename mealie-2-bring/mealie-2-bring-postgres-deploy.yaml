@@ -24,7 +24,12 @@ spec:
               cpu: "50m"    
             limits:
               memory: "200Mi"
-              cpu: "100m"             
+              cpu: "100m"       
+          envFrom:
+            - secretRef:
+                name: ring-2-bring-secrets
+            - configMapRef:
+                name: mealie-2-bring-config                    
 ---
 apiVersion: v1
 kind: Service

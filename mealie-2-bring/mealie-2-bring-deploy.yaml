@@ -27,8 +27,10 @@ spec:
               cpu: "100m"            
           envFrom:
             - secretRef:
-                name: mealie-2-bring-env
----
+                name: ring-2-bring-secrets
+            - configMapRef:
+                name: mealie-2-bring-config
+---                
 apiVersion: v1
 kind: Service
 metadata:
