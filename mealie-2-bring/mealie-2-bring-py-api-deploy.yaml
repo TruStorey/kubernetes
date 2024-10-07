@@ -31,17 +31,3 @@ spec:
                 name: mealie-2-bring-secrets
             - configMapRef:
                 name: mealie-2-bring-config                     
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mealie-2-bring-api
-  namespace: mealie 
-spec:
-  selector:
-    app: mealie-2-bring-api
-  ports:
-    - protocol: TCP
-      port: 12000
-      targetPort: 8742
-  type: ClusterIP
