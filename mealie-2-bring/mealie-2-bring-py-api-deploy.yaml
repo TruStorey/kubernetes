@@ -42,6 +42,6 @@ spec:
     app: mealie-2-bring-api
   ports:
     - protocol: TCP
-      port: 8742
+      port: 12000
       targetPort: 8742
-  type: LoadBalancer
+  type: ClusterIP
