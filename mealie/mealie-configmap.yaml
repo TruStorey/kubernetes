@@ -17,7 +17,7 @@ data:
   OIDC_SIGNUP_ENABLED: "true"
   OIDC_CONFIGURATION_URL: "https://login.microsoftonline.com/cd9c5644-57e6-407d-b2e3-f211448f33e6/v2.0/.well-known/openid-configuration"
   OIDC_PROVIDER_NAME: "Azure OpenID"
-  OIDC_GROUPS_CLAIM: "groups"
+  OIDC_GROUPS_CLAIM: "Group.Read.All"
   OIDC_ADMIN_GROUP: "37b0c765-f580-491b-b7f7-7b8e016aa1e6"
   THEME_DARK_PRIMARY: "#28B463"
   THEME_DARK_ACCENT:	"#186a3b"
